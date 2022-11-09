@@ -8,9 +8,9 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.jayway.jsonpath.JsonPath;
 
 import ch.firealarmtv.config.PropertiesConfigHandler;
-import ch.firealarmtv.objects.Alarm;
-import ch.firealarmtv.objects.Coordinate;
-import ch.firealarmtv.objects.Hydrant;
+import ch.firealarmtv.model.Alarm;
+import ch.firealarmtv.model.Coordinate;
+import ch.firealarmtv.model.Hydrant;
 
 public class HydrantsHandler {
 
@@ -21,8 +21,8 @@ public class HydrantsHandler {
 		Coordinate alarmPosWGS = new Coordinate(alarm.getLat(), alarm.getLon(), Coordinate.WGS84);
 		Coordinate alarmPosLV = alarmPosWGS.getLV95();
 
-		String query = config.getStr("map.hydrants.api")
-				+ "?where=1%3D1&objectIds=&time=&geometry=" + alarmPosLV.getLon() + "%2C" + alarmPosLV.getLat()
+		String query = config.getStr("map.hydrants.api") + "?where=1%3D1&objectIds=&time=&geometry="
+				+ alarmPosLV.getLon() + "%2C" + alarmPosLV.getLat()
 				+ "&geometryType=esriGeometryPoint&inSR=&spatialRel=esriSpatialRelIntersects" + "&distance="
 				+ config.getInt("map.hydrants.api.radius")
 				+ "&units=esriSRUnit_Meter&relationParam=&outFields=No_hydrant&returnGeometry=true"
@@ -46,22 +46,23 @@ public class HydrantsHandler {
 			e.printStackTrace();
 		}
 		// Iterate through the node "features" and get all child nodes to get all
-		JsonNode pathResult = root.path("features");
+		if (root != null) {
+			JsonNode pathResult = root.path("features");
 
-		String json = root.toString();
+			String json = root.toString();
 
-		int size = pathResult.size();
+			int size = pathResult.size();
 
-		for (int i = 0; i < size; i++) {
-			String id = JsonPath.read(json, "$.features[" + i + "].properties.No_hydrant");
-			Double lat = JsonPath.read(json, "$.features[" + i + "].geometry.coordinates[1]");
-			Double lon = JsonPath.read(json, "$.features[" + i + "].geometry.coordinates[0]");
-			hydrantList.add(new Hydrant(id, lat, lon));
+			for (int i = 0; i < size; i++) {
+				String id = JsonPath.read(json, "$.features[" + i + "].properties.No_hydrant");
+				Double lat = JsonPath.read(json, "$.features[" + i + "].geometry.coordinates[1]");
+				Double lon = JsonPath.read(json, "$.features[" + i + "].geometry.coordinates[0]");
+				hydrantList.add(new Hydrant(id, lat, lon));
+			}
 		}
 
 		return hydrantList;
 
 	}
-
 
 }

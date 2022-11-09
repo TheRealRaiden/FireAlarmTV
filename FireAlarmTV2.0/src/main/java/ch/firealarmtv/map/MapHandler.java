@@ -9,8 +9,8 @@ import com.gluonhq.maps.MapView;
 
 import ch.firealarmtv.config.PropertiesConfigHandler;
 import ch.firealarmtv.handlers.HydrantsHandler;
-import ch.firealarmtv.objects.Alarm;
-import ch.firealarmtv.objects.Hydrant;
+import ch.firealarmtv.model.Alarm;
+import ch.firealarmtv.model.Hydrant;
 import javafx.geometry.Pos;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;

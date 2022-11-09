@@ -8,7 +8,7 @@ import org.springframework.messaging.simp.stomp.StompSessionHandlerAdapter;
 
 import ch.firealarmtv.application.App;
 import ch.firealarmtv.config.PropertiesConfigHandler;
-import ch.firealarmtv.objects.Alarm;
+import ch.firealarmtv.model.Alarm;
 
 
 public class AlarmStompSessionHandler extends StompSessionHandlerAdapter{

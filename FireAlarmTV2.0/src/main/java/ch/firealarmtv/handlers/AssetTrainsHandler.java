@@ -12,9 +12,9 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import ch.firealarmtv.config.PropertiesConfigHandler;
-import ch.firealarmtv.objects.AssetTrain;
-import ch.firealarmtv.objects.Personnel;
-import ch.firealarmtv.objects.Vehicle;
+import ch.firealarmtv.model.AssetTrain;
+import ch.firealarmtv.model.Personnel;
+import ch.firealarmtv.model.Vehicle;
 
 import org.w3c.dom.Node;
 import org.w3c.dom.Element;
